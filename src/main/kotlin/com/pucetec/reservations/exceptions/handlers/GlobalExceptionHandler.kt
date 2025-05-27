@@ -3,6 +3,7 @@ package com.pucetec.reservations.exceptions.handlers
 import com.pucetec.reservations.exceptions.ProfessorNotFoundException
 import com.pucetec.reservations.exceptions.StudentAlreadyEnrolledException
 import com.pucetec.reservations.exceptions.SubjectNotFoundException
+import com.pucetec.reservations.exceptions.SubjectNotFoundExceptionDelete
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice
@@ -22,4 +23,8 @@ class GlobalExceptionHandler {
     @ExceptionHandler(StudentAlreadyEnrolledException::class)
     fun handleStudentAlreadyEnrolled(ex: StudentAlreadyEnrolledException): ResponseEntity<Map<String, String>> =
         ResponseEntity(mapOf("error" to ex.message.orEmpty()), HttpStatus.CONFLICT)
+
+    @ExceptionHandler(SubjectNotFoundExceptionDelete::class)
+    fun handleSubjectNotFoundForDelete(ex: SubjectNotFoundExceptionDelete): ResponseEntity<Map<String, String>> =
+        ResponseEntity(mapOf("error" to ex.message.orEmpty()), HttpStatus.NOT_FOUND)
 }
